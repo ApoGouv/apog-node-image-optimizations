@@ -1,0 +1,20 @@
+{
+  "name": "apog-node-image-optimizations",
+  "version": "2.0.0",
+  "description": "A Node.js tool for bulk optimizing JPG images with resizing and optional WebP conversion.",
+  "keywords": ["image", "optimization", "bulk", "jpeg", "webp", "resize", "sharp"],
+  "main": "src/index.js",
+  "scripts": {
+    "nio": "node src/index.js"
+  },
+  "author": "Apostolos Gouvalas",
+  "license": "MIT",
+  "licenseFile": "LICENSE",
+  "engines": {
+    "node": ">=14.x"
+  },
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "sharp": "^0.33.4"
+  }
+}
