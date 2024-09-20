@@ -1,19 +1,19 @@
-# APOG Node Image Optimizations
+# 📸 APOG Node Image Optimizations
 
 A Node.js tool for bulk optimizing JPG images with resizing and optional WebP conversion.
 
-## Features
+## 🌟 Features
 
 - Bulk image processing
 - Resizing of images with customizable maximum dimensions
 - Optional conversion to WebP format
 - Configurable output options
 
-## Installation
+## 🛠️ Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/apog-node-image-optimizations.git
+   git clone https://github.com/ApoGouv/apog-node-image-optimizations.git
    cd apog-node-image-optimizations
    ```
 
@@ -22,15 +22,7 @@ A Node.js tool for bulk optimizing JPG images with resizing and optional WebP co
    npm install
    ```
 
-## Usage
-
-To run the image optimization tool, use the following command:
-
-```bash
-npm run nio -- /path/to/your/images
-```
-
-### Options
+### ⚙️ Options
 
 You can customize the behavior of the tool by modifying the `src/config.js` file, where you can set:
 
@@ -47,7 +39,7 @@ You can customize the behavior of the tool by modifying the `src/config.js` file
 - `recursive` (boolean): Whether to scan directories recursively. Default is `false`.
 - `fileExtToOptim` (array): File extensions to optimize. Default is `['.jpg', '.jpeg']`.
 
-## Example
+## 📁 Usage
 
 To optimize images located in the `images` folder, run:
 
@@ -61,6 +53,6 @@ or for a custom path
 npm run nio -- /full/path/to/unoptimized/images/folder
 ```
 
-## License
+## 📜 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
