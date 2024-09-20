@@ -32,6 +32,7 @@ You can customize the behavior of the tool by modifying the `src/config.js` file
 - `saveLocation` (string): Save location options: `'same'` or `'resized'`. Default is `'resized'`.
 - `suffix` (string): Suffix for resized images when not overwriting. Default is `'_resized'`.
 - `overwriteOriginal` (boolean): If true, replaces the original file. Default is `false`.
+- `normalizeBasename` (boolean): If true, the output basenames will be normalized. Default is `true`.
 - `quality` (number): JPEG output quality. Default is `85`.
 - `convertToWebp` (boolean): Whether to save images as `.webp`. Default is `true`.
 - `webpQuality` (number): WebP output quality. Default is `85`.

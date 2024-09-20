@@ -60,4 +60,46 @@ function formatElapsedTime(startTime, endTime) {
   return result;
 }
 
-module.exports = { formatFileSize, formatElapsedTime };
+/**
+ * Normalizes the basename of a file by replacing spaces with dashes,
+ * parentheses with underscores, and other unwanted characters with dashes.
+ * This helps create a cleaner, more consistent filename suitable for various
+ * file systems while ensuring no consecutive dashes remain.
+ *
+ * @param {string} basename - The basename of the file to normalize.
+ * @returns {string} - The normalized basename.
+ */
+function normalizeBasename(basename) {
+  if (!basename) return basename;
+
+  const dash = '-';
+  const underscore = '_';
+
+  // Trim leading and trailing whitespace
+  let normalized = basename.trim();
+
+  // Replace spaces with dashes
+  normalized = normalized.replace(/\s+/g, dash);
+
+  // Replace parentheses with underscores
+  normalized = normalized.replace(/[()]/g, underscore);
+
+  // Replace unwanted characters with dashes
+  normalized = normalized.replace(/[^\w]/g, dash);
+
+  // Replace multiple consecutive dashes with a single dash
+  normalized = normalized.replace(/-+/g, dash);
+
+  // Replace a dash followed by an underscore with an underscore
+  normalized = normalized.replace(/-_/g, underscore);
+
+  // Replace multiple consecutive underscores with a single underscore
+  normalized = normalized.replace(/_+/g, underscore);
+
+  // Remove any leading or trailing dashes or underscores
+  normalized = normalized.replace(/^[-_]+|[-_]+$/g, '');
+
+  return normalized;
+}
+
+module.exports = { formatFileSize, formatElapsedTime, normalizeBasename };

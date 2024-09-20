@@ -1,7 +1,7 @@
 const sharp = require('sharp');
 const fs = require('fs-extra');
 const path = require('path');
-const { formatFileSize } = require('../utils/stringUtils');
+const { formatFileSize, normalizeBasename } = require('../utils/stringUtils');
 
 class ImageProcessor {
   constructor(options) {
@@ -38,7 +38,9 @@ class ImageProcessor {
       // Generate output file path based on options
       const ext = path.extname(filePath);
       const extLower = ext.toLowerCase();
-      const baseName = path.basename(filePath, ext);
+      const baseName = this.options.normalizeBasename
+        ? normalizeBasename(path.basename(filePath, ext))
+        : path.basename(filePath, ext);
       let outputFilePath = filePath;
 
       if (this.options.saveLocation === 'resized') {
@@ -60,7 +62,8 @@ class ImageProcessor {
       // // DEBUG
       // console.log('Debug ImageProcessor info: ', {
       //   filePath,
-      //   baseName,
+      //   baseNameNorm: baseName,
+      //   baseName: path.basename(filePath, ext),
       //   ext,
       //   extLower,
       //   outputFilePath,

@@ -11,6 +11,7 @@ const path = require('path');
  * @property {string} saveLocation - Specifies where to save the processed images. Options are 'same' (overwrite original) or 'resized' (save in a separate folder).
  * @property {string} suffix - Suffix to append to resized images when not overwriting. Default is '_resized'.
  * @property {boolean} overwriteOriginal - If true, the original file will be replaced with the optimized file. Default is false.
+ * @property {boolean} normalizeBasename - If true, the output basenames will be normalized. Default is true.
  * @property {number} quality - JPEG output quality (1-100). Default is 85.
  * @property {boolean} convertToWebp - If true, images will also be saved in WebP format. Default is true.
  * @property {number} webpQuality - Quality setting for the WebP format (1-100). Default is 85.
@@ -25,6 +26,7 @@ module.exports = {
   saveLocation: 'resized', // Options: 'same', 'resized'
   suffix: '_resized', // Suffix for resized images when not overwriting
   overwriteOriginal: false, // If true, replace the original file
+  normalizeBasename: true, // Normalize output basenames
   quality: 85, // JPEG output quality (default: 85)
   convertToWebp: true, // Whether to save as .webp
   webpQuality: 85, // WebP output quality (default: 85)
