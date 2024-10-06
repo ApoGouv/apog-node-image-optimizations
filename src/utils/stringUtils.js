@@ -93,6 +93,9 @@ function normalizeBasename(basename) {
   // Replace a dash followed by an underscore with an underscore
   normalized = normalized.replace(/-_/g, underscore);
 
+  // Replace an underscore followed by a dash with an underscore
+  normalized = normalized.replace(/_-/g, underscore);
+
   // Replace multiple consecutive underscores with a single underscore
   normalized = normalized.replace(/_+/g, underscore);
 
