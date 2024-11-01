@@ -11,6 +11,38 @@ class ImageProcessor {
   }
 
   /**
+   * Generates a unique output file path by checking if the file already exists.
+   * If the file exists, adds an incremented suffix to avoid overwriting.
+   *
+   * @param {string} outputDir - Directory for the output file.
+   * @param {string} baseName - Base name of the file.
+   * @param {string} suffix - Custom suffix for the file name.
+   * @param {string} extLower - File extension in lowercase.
+   * @param {string} initialFilePath - The initially generated file path.
+   * @returns {string} - Unique output file path.
+   */
+  async generateUniqueFilePath(
+    outputDir,
+    baseName,
+    suffix,
+    extLower,
+    initialFilePath
+  ) {
+    let counter = 1;
+    let uniqueFilePath = initialFilePath;
+
+    while (await fs.pathExists(uniqueFilePath)) {
+      uniqueFilePath = path.join(
+        outputDir,
+        `${baseName}_${counter}${suffix}${extLower}`
+      );
+      counter += 1;
+    }
+
+    return uniqueFilePath;
+  }
+
+  /**
    * Resize and optimize an image file.
    * @param {string} filePath - Path to the image file.
    */
@@ -41,23 +73,28 @@ class ImageProcessor {
       const baseName = this.options.normalizeBasename
         ? normalizeBasename(path.basename(filePath, ext))
         : path.basename(filePath, ext);
+
       let outputFilePath = filePath;
+      let outputDir = path.dirname(filePath);
 
       if (this.options.saveLocation === 'resized') {
-        const outputDir = path.join(path.dirname(filePath), 'resized');
+        outputDir = path.join(path.dirname(filePath), 'resized');
         await fs.ensureDir(outputDir);
-        outputFilePath = path.join(
-          outputDir,
-          baseName + this.options.suffix + extLower
-        );
-      } else if (this.options.saveLocation === 'same') {
-        outputFilePath = this.options.overwriteOriginal
-          ? filePath
-          : path.join(
-              path.dirname(filePath),
-              baseName + this.options.suffix + extLower
-            );
       }
+
+      outputFilePath =
+        this.options.saveLocation === 'same' && this.options.overwriteOriginal
+          ? filePath
+          : path.join(outputDir, baseName + this.options.suffix + extLower);
+
+      // Ensure the output file path is unique
+      outputFilePath = await this.generateUniqueFilePath(
+        outputDir,
+        baseName,
+        this.options.suffix,
+        extLower,
+        outputFilePath
+      );
 
       // // DEBUG
       // console.log('Debug ImageProcessor info: ', {
